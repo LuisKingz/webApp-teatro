@@ -1,0 +1,16 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 4/12/2018, 09:49:46 PM
+    Author     : RAGAd
+*/
+
+
+body{
+    background-repeat: no-repeat;
+    background-size: 100%; 
+    background-image: url("../img/fondo.png"); 
+}

@@ -1,0 +1,441 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<struts>
+
+    <constant name="struts.devMode" value="false"/>
+    <package name="default" extends="struts-default">
+        
+        <action name="enviarCorreo" class="com.utez.controller.CorreoAction" method="enviarCorreo">
+            <result name="success">/correo.jsp</result>
+            <result name="error">/home.jsp</result>
+        </action>
+        
+        <action name="cambioClave" class="com.utez.controller.CorreoAction" method="cambioClave">
+            <result name="success">/vistas/cambioPassword/cambiarPassword.jsp</result>
+            <result name="error">/home.jsp</result>
+        </action>
+        
+        <action name="cambiarContrasenaUsuario" class="com.utez.controller.CorreoAction" method="cambiarContrasenaUsuario">
+            <result name="success">/login.jsp</result>
+            <result name="error">/home.jsp</result>
+        </action>
+        
+        <action name="login" class="com.utez.controller.LoginAction" method="login">
+            <result name="usuario" type="redirectAction">consultarObrasUsuario</result>
+            <result name="admin" type="redirectAction">Administrador</result>
+            <result name="error">/login.jsp</result>
+        </action>
+        
+        <action name="loginIncorrecto">
+            <result>/login.jsp</result>
+        </action>
+        
+        <action name="registrarse" class="com.utez.controller.RegistroAction" method="registrarse">
+            <result name="success">/login.jsp</result>
+            <result name="error">/Resgistrarse.jsp</result>
+        </action>
+        
+    </package>
+
+    <package name="privados" extends="struts-default,interceptor,json-default">
+       
+        <action name="consultaEspecificaFuncion" class="com.utez.controller.FuncionAction" method="consultaEspecificaFuncion">
+            <result name="success">/vistas/vistaUsuario/vistaFuncion/funcion.jsp</result>
+        </action>
+        
+        <action name="consultarFuncionIdV" class="com.utez.controller.FuncionAction" method="consultarFuncionIdV">
+            <result name="success" >/vistas/vistaUsuario/vistaFuncion/PagoFuncion.jsp</result>
+        </action>
+
+        <action name="registrarAsientos" class="com.utez.controller.AsientoFAction" method="registrarAsientos">
+            <result type="json"/>
+        </action>
+        
+        <action name="consultarTarjetaPorId" class="com.utez.controller.VentaAction" method="consultarTarjetaPorId">
+            <result name="success">/vistas/vistaUsuario/pagoFuncion3.jsp</result>
+        </action>
+
+        <action name="registrarVenta" class="com.utez.controller.VentaAction" method="registrarVenta">
+            <result name="success">/vistas/vistaUsuario/vistaFuncion/PagoFuncion2.jsp</result>
+        </action>
+        
+
+
+        
+        <action name="consultarObrasUsuario" class="com.utez.controller.ObraAction" method="consultarObras">
+            <result name="success">/vistas/vistaUsuario/indexUsuario.jsp</result>
+        </action>
+        
+        <action name="Administrador">
+            <result>/vistas/indexAdmin.jsp</result>
+        </action>
+        
+        <!--CRUD DE ACTORES -->
+        <action name="consultarActores" class="com.utez.controller.ActorAction" method="consultarActores">
+            <result name="success">/vistas/actor/Actores.jsp</result>
+        </action>
+        
+        <action name="registrarActor" class="com.utez.controller.ActorAction" method="registrarActor">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarActores</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarActores</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="eliminarActor" class="com.utez.controller.ActorAction" method="eliminarActor">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarActores</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarActores</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="consultarActorId" class="com.utez.controller.ActorAction" method="consultarActorId">
+            <result name="success">/vistas/actor/ModificarActor.jsp</result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarActores</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="modificarActor" class="com.utez.controller.ActorAction" method="modificarActor">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarActores</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarActores</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <!--CRUD DE PROMOCIONES -->
+        <action name="enviarCorreoPromocion" class="com.utez.controller.PromocionAction" method="enviarCorreoPromocion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="consultarPromociones" class="com.utez.controller.PromocionAction" method="consultarPromociones">
+            <result name="success">/vistas/promocion/Promociones.jsp</result>
+        </action>
+        
+        <action name="registrarPromocion" class="com.utez.controller.PromocionAction" method="registrarPromocion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="eliminarPromocion" class="com.utez.controller.PromocionAction" method="eliminarPromocion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="consultarPromocionId" class="com.utez.controller.PromocionAction" method="consultarPromocionId">
+            <result name="success">/vistas/promocion/ModificarPromocion.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <action name="modificarPromocion" class="com.utez.controller.PromocionAction" method="modificarPromocion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarPromociones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+ 
+        <!-- ACTIONS DE OBRAS -->
+        <action name="consultarObras" class="com.utez.controller.ObraAction" method="consultarObras">
+            <result name="success">/vistas/obra/Obras.jsp</result>
+        </action>
+        <action name="eliminarObra" class="com.utez.controller.ObraAction" method="eliminarObra">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarObras</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarObras</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        <action name="registrarObra" class="com.utez.controller.ObraAction" method="registrarObra">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarObras</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarObras</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        <action name="registroObra" class="com.utez.controller.ObraAction" method="registroObra">
+            <result name="success">/vistas/obra/RegistrarObra.jsp</result>
+        </action>
+        <action name="modificarObra" class="com.utez.controller.ObraAction" method="modificarObra">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarObras</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarObras</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        <action name="consultarObraId" class="com.utez.controller.ObraAction" method="consultarObraId">
+            <result name="success">/vistas/obra/ModificarObra.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        
+        
+        
+        <!-- ACTIONS DE FUNCIONES -->
+        <action name="consultarFunciones" class="com.utez.controller.FuncionAction" method="consultarFunciones">
+            <result name="success">/vistas/funcion/Funciones.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <action name="eliminarFuncion" class="com.utez.controller.FuncionAction" method="eliminarFuncion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarFunciones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarFunciones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="registrarFuncion" class="com.utez.controller.FuncionAction" method="registrarFuncion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarFunciones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarFunciones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="registroFuncion" class="com.utez.controller.FuncionAction" method="registroFuncion">
+            <result name="success">/vistas/funcion/RegistrarFuncion.jsp</result>
+        </action>
+        
+        <action name="modificarFuncion" class="com.utez.controller.FuncionAction" method="modificarFuncion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarFunciones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarFunciones</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="consultarFuncionId" class="com.utez.controller.FuncionAction" method="consultarFuncionId">
+            <result name="success">/vistas/funcion/ModificarFuncion.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <!--CRUD GENERO -->
+ 
+        <action name="consultarGeneros" class="com.utez.controller.GeneroAction" method="consultarGeneros">
+            <result name="success">/vistas/genero/Genero.jsp</result>
+        </action>
+
+        <action name="agregarGenero" class="com.utez.controller.GeneroAction" method="agregarGenero">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarGeneros</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarGeneros</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+
+        <action name="eliminarGenero" class="com.utez.controller.GeneroAction" method="eliminarGenero">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarGeneros</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarGeneros</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        <action name="consultaEspecificaGenero" class="com.utez.controller.GeneroAction" method="consultaEspecificaGenero">
+            <result name="success">/vistas/genero/ModificarGenero.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        
+        <action name="modificarGenero" class="com.utez.controller.GeneroAction" method="modificarGenero">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarGeneros</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarGeneros</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        
+
+        <!--CRUD SECCION -->
+        
+        <action name="consultarSeccion" class="com.utez.controller.SeccionAction" method="consultarSeccion">
+            <result name="success">/vistas/seccion/Seccion.jsp</result>
+        </action>
+        
+        <action name="registroSeccion" class="com.utez.controller.SeccionAction" method="registroSeccion">
+            <result name="success">/vistas/seccion/AgregarSeccion.jsp</result>
+        </action>
+
+        <action name="agregarSeccion" class="com.utez.controller.SeccionAction" method="agregarSeccion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarSeccion</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarSeccion</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+
+        <action name="eliminarSeccion" class="com.utez.controller.SeccionAction" method="eliminarSeccion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarSeccion</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarSeccion</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+
+        <action name="consultaEspecifica" class="com.utez.controller.SeccionAction" method="consultaEspecifica">
+            <result name="success">/vistas/seccion/ModificarSeccion.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+
+        <action name="modificarSeccion" class="com.utez.controller.SeccionAction" method="modificarSeccion">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarSeccion</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarSeccion</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+        
+        
+
+        <!--CRUD AUDITORIO -->
+        
+        <action name="consultarAuditorio" class="com.utez.controller.AuditorioAction" method="consultarAuditorio">
+            <result name="success">/vistas/auditorio/Auditorio.jsp</result>
+        </action>
+
+        <action name="agreagarAuditorio" class="com.utez.controller.AuditorioAction" method="agreagarAuditorio">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarAuditorio</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarAuditorio</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+
+        <action name="eliminarAuditorio" class="com.utez.controller.AuditorioAction" method="eliminarAuditorio">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarAuditorio</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarAuditorio</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+
+        <action name="consultarEspecificaAuditorio" class="com.utez.controller.AuditorioAction" method="consultarEspecificaAuditorio">
+            <result name="success">/vistas/auditorio/ModificarAuditorio.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>  
+
+        <action name="modificarAuditorio" class="com.utez.controller.AuditorioAction" method="modificarAuditorio">
+            <result name="success" type="redirectAction">
+                <param name="actionName">consultarAuditorio</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+            <result name="error" type="redirectAction">
+                <param name="actionName">consultarAuditorio</param>
+                <param name="mensaje">${mensaje}</param>
+            </result>
+        </action>
+
+
+        <!--CERRAR SESION-->
+        <action name="cerrarSession" class="com.utez.controller.LoginAction" method="cerrarSession">
+            <result name="success">/home.jsp</result>
+        </action>
+
+    </package>
+    
+    
+    <!--INTERCEPTORES-->
+    <package name="interceptor" extends="struts-default">
+        <interceptors>
+            <interceptor name="sessionValida" class="servicios.utilerias.IntercerptorSesion"/>
+            <interceptor-stack name="pilaInterceptor">
+                <interceptor-ref name="sessionValida"/>
+                <interceptor-ref name="defaultStack"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="pilaInterceptor"/>
+        
+        <global-results>
+            <result name="noLogin">
+                <param name="location">/home.jsp</param>
+                <param name="status">401</param>
+            </result>
+        </global-results>
+    </package>
+
+</struts>

@@ -1,0 +1,20 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 11/12/2018, 08:15:38 AM
+    Author     : Oscar Rodríguez
+*/
+
+.btn-circle {
+    width: 20px;
+    height: 20px;
+    padding: 6px 0px;
+    border-radius: 0px;
+    text-align: center;
+    font-size: 8px;
+    line-height: 1.42857;
+    margin: 1.5px;
+}
